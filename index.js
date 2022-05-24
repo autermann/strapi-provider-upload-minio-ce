@@ -2,11 +2,11 @@ const Minio = require('minio');
 
 module.exports = {
   init(providerOptions) {
-    const { port, useSSL, endPoint, accessKey, secretKey, bucket, host, folder } = providerOptions;
+    const { port, endPointSSL, hostSSL, endPoint, accessKey, secretKey, bucket, host, folder } = providerOptions;
     const MINIO = new Minio.Client({
       endPoint,
       port: parseInt(port, 10) || 9000,
-      useSSL: useSSL === "true",
+      useSSL: endPointSSL === "true",
       accessKey,
       secretKey,
     });
@@ -17,7 +17,7 @@ module.exports = {
       return `${path}${file.hash}${file.ext}`;
     };
     const getDeletePath = (file) => {
-      const hostPart = (useSSL === 'true' ? 'https://' : 'http://') + `${host}/${bucket}/`;
+      const hostPart = (hostSSL === 'true' ? 'https://' : 'http://') + `${host}/${bucket}/`;
       const path = file.url.replace(hostPart, '');
 
       return path;
@@ -37,7 +37,7 @@ module.exports = {
                 return reject(err);
               }
 
-              const hostPart = (useSSL === 'true' ? 'https://' : 'http://') + `${host}/`
+              const hostPart = (hostSSL === 'true' ? 'https://' : 'http://') + `${host}/`
               const filePath = `${bucket}/${path}`;
               file.url = `${hostPart}${filePath}`;
 
