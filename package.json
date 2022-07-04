@@ -2,7 +2,7 @@
   "name": "strapi-provider-upload-minio-ce",
   "version": "1.0.4",
   "description": "minio provider for strapi ce 3.6.8 and 4.0.0",
-  "main": "index.js", 
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/flyce/strapi-provider-upload-minio-ce#readme",
   "dependencies": {
+    "mime-types": "^2.1.35",
     "minio": "^7.0.19"
   }
 }
