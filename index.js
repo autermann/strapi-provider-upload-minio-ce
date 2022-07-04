@@ -1,4 +1,5 @@
 const Minio = require('minio');
+const mime = require('mime-types');
 
 module.exports = {
   init(providerOptions) {
@@ -32,6 +33,10 @@ module.exports = {
             bucket,
             path,
             Buffer.from(file.buffer, 'binary'),
+            null,
+            {
+              'Content-type': mime.lookup(path),
+            },
             (err, _etag) => {
               if (err) {
                 return reject(err);
